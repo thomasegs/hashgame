@@ -73,9 +73,9 @@ h1 {
 
 /* classe hide */
 
-/* .hide {
+.hide {
     display: none !important; 
-} */
+}
 
 /* placar */
 
@@ -120,5 +120,4 @@ h1 {
     background-color: tomato;
     color: burlywood;
     padding: 20px;
-    display: none;
 }
