@@ -13,10 +13,12 @@ let messageText = document.querySelector("#message p"); //messageText passa a se
 let secondPlayer; // define uma variável para o segundo jogador
 
 // Contador de jogadas
+
 let player1 = 0; //quantas vezes o jogador um jogou
 let player2 = 0; //quantas vezes o jogador dois jogou
 
 // adicionando o evento de click aos boxes
+
 for (let i = 0; i < boxes.length; i++) {//inicia um contador de 0 até o tamanho da array que a var boxes gera
   boxes[i].addEventListener("click", function () {//adiciona o evento de click e a função a cada um dos elementos contidos no array boxes
     if (this.childNodes.length == 0) {//verifica o tamanho do nó na box da vez no loop, se ele for igual a zero significa que nenhum elemento foi inserido na box.
@@ -30,6 +32,135 @@ for (let i = 0; i < boxes.length; i++) {//inicia um contador de 0 até o tamanho
       }
       let cloneEl = el.cloneNode(true); //define uma variável que irá receber o clone do elemente el
       this.appendChild(cloneEl); //acrescenta a box da vez o elemento contido em cloneEl
+      checkWinCondition();//chama a função que verifica as condições de vitória.
     }
   });
+}
+
+//declara a função que define a condição de vitória
+function checkWinCondition() {
+    let b1 = document.getElementById("block-1");
+    let b2 = document.getElementById("block-2");
+    let b3 = document.getElementById("block-3");
+    let b4 = document.getElementById("block-4");
+    let b5 = document.getElementById("block-5");
+    let b6 = document.getElementById("block-6");
+    let b7 = document.getElementById("block-7");
+    let b8 = document.getElementById("block-8");
+    let b9 = document.getElementById("block-9");
+
+    //horizontal superior
+    if(b1.childNodes.length > 0 && b2.childNodes.length > 0 && b3.childNodes.length > 0) {
+        let b1Child = b1.childNodes[0].className;
+        let b2Child = b2.childNodes[0].className;
+        let b3Child = b3.childNodes[0].className;
+        if(b1Child == "x" && b2Child == "x" && b3Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b1Child == "o" && b2Child == "o" && b3Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //horizontal meio
+    if(b4.childNodes.length > 0 && b5.childNodes.length > 0 && b6.childNodes.length > 0) {
+        let b4Child = b4.childNodes[0].className;
+        let b5Child = b5.childNodes[0].className;
+        let b6Child = b6.childNodes[0].className;
+        if(b4Child == "x" && b5Child == "x" && b6Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b4Child == "o" && b5Child == "o" && b6Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //horizontal inferior
+    if(b7.childNodes.length > 0 && b8.childNodes.length > 0 && b9.childNodes.length > 0) {
+        let b7Child = b7.childNodes[0].className;
+        let b8Child = b8.childNodes[0].className;
+        let b9Child = b9.childNodes[0].className;
+        if(b7Child == "x" && b8Child == "x" && b9Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b7Child == "o" && b8Child == "o" && b9Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //vertical esquerda
+    if(b1.childNodes.length > 0 && b4.childNodes.length > 0 && b7.childNodes.length > 0) {
+        let b1Child = b1.childNodes[0].className;
+        let b4Child = b4.childNodes[0].className;
+        let b7Child = b7.childNodes[0].className;
+        if(b1Child == "x" && b4Child == "x" && b7Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b1Child == "o" && b4Child == "o" && b7Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //vertical meio
+    if(b2.childNodes.length > 0 && b5.childNodes.length > 0 && b8.childNodes.length > 0) {
+        let b2Child = b2.childNodes[0].className;
+        let b5Child = b5.childNodes[0].className;
+        let b8Child = b8.childNodes[0].className;
+        if(b2Child == "x" && b5Child == "x" && b8Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b2Child == "o" && b5Child == "o" && b8Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //vertical direita
+    if(b3.childNodes.length > 0 && b6.childNodes.length > 0 && b9.childNodes.length > 0) {
+        let b3Child = b3.childNodes[0].className;
+        let b6Child = b6.childNodes[0].className;
+        let b9Child = b9.childNodes[0].className;
+        if(b3Child == "x" && b6Child == "x" && b9Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b3Child == "o" && b6Child == "o" && b9Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //diagonal 1
+    if(b1.childNodes.length > 0 && b5.childNodes.length > 0 && b9.childNodes.length > 0) {
+        let b1Child = b1.childNodes[0].className;
+        let b5Child = b5.childNodes[0].className;
+        let b9Child = b9.childNodes[0].className;
+        if(b1Child == "x" && b5Child == "x" && b9Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b1Child == "o" && b5Child == "o" && b9Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //diagonal 2
+    if(b3.childNodes.length > 0 && b5.childNodes.length > 0 && b7.childNodes.length > 0) {
+        let b3Child = b3.childNodes[0].className;
+        let b5Child = b5.childNodes[0].className;
+        let b7Child = b7.childNodes[0].className;
+        if(b3Child == "x" && b5Child == "x" && b7Child == "x") {
+            //x ganhou
+            console.log("X Venceu")
+        }else if(b3Child == "o" && b5Child == "o" && b7Child == "o") {
+            //o ganhou
+            console.log("O Venceu")
+        }
+    }
+    //velha
+    let counter = 0;
+    for(let i = 0; i < boxes.length; i++) {
+        if(boxes[i].childNodes[0] != undefined) {
+            counter++;
+        }
+        if (counter == 9) {
+            console.log("Deu velha")
+        }
+    }
 }
