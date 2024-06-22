@@ -11,6 +11,21 @@ let buttons = document.querySelectorAll("#buttons-container button"); //buttons 
 let messageContainer = document.querySelector("#message"); //messageContainer passa a ser a div com o id="message"
 let messageText = document.querySelector("#message p"); //messageText passa a ser os paragrafos contidos na div com id="message"
 let secondPlayer; // define uma variável para o segundo jogador
+let gameOver = false; // Adiciona variável para rastrear o fim do jogo
+
+//evento 2players ou IA
+for(let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function(){
+        secondPlayer = this.getAttribute("id");
+        for(let j = 0; j < buttons.length; j++) {
+            buttons[j].style.display = "none";
+        }
+        setTimeout(function() {
+            let container = document.querySelector("#container")
+            container.classList.remove("hide");
+        }, 500)
+    })
+}
 
 // Contador de jogadas
 
@@ -25,10 +40,17 @@ for (let i = 0; i < boxes.length; i++) {//inicia um contador de 0 até o tamanho
       let el = 0; //cria um elemento para armazenar o "x" ou o "o"
       if (player1 == player2) {//se o número de jogadas do player 1 for igual a do player dois, é a vez do player um.
         el = x; //o elemento criado anteriormente recebe o elemento contido na var "x"
-        player1 += 1; //acrescenta um ao número de jogadas do player 1
+        player1 ++; //acrescenta um ao número de jogadas do player 1
+        if(secondPlayer == "IA-player" && !gameOver) {
+            setTimeout(function() {
+                computerPlay();
+                player2++;
+                checkWinCondition();//chama a função que verifica as condições de vitória.
+            }, 500);
+        }
       } else {//se o número de jogadas do player 1 e do player dois forem diferentes, significa que é a vez do player dois.
         el = o; //o elemento criado anteriormente recebe o elemento contiddo na var "o"
-        player2 += 1; //adiciona um ao número de jogadas do player 2 igualando ao player 1 e retornando a jogada para ele.
+        player2 ++; //adiciona um ao número de jogadas do player 2 igualando ao player 1 e retornando a jogada para ele.
       }
       let cloneEl = el.cloneNode(true); //define uma variável que irá receber o clone do elemente el
       this.appendChild(cloneEl); //acrescenta a box da vez o elemento contido em cloneEl
@@ -188,8 +210,34 @@ function declareWinner(winner) {
     }, 3000);
     player1 = 0;
     player2 = 0;
+    gameOver = true;
     let boxesToRemove = document.querySelectorAll(".box div");
     for(let i = 0; i < boxesToRemove.length; i++) {
         boxesToRemove[i].parentNode.removeChild(boxesToRemove[i]);
+    }
+    setTimeout(function() {
+        gameOver = false; // Reseta o estado do jogo após a exibição da mensagem
+    }, 3500);
+}
+// executa a jogada do computador
+function computerPlay() {
+    if (gameOver) return;
+    let cloneO = o.cloneNode(true)
+    counter = 0;
+    filled = 0;
+    for(let i = 0; i < boxes.length; i++) {
+        let randomNumber = Math.floor(Math.random() * 5);
+        if(boxes[i].childNodes[0] == undefined) {
+            if(randomNumber <= 1) {
+                boxes[i].appendChild(cloneO)
+                counter++;
+                break;
+            }
+        } else {
+            filled++;
+        }
+    }
+    if(counter == 0 && filled < 9) {
+        computerPlay();
     }
 }
